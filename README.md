@@ -8,7 +8,7 @@ This project is a Spring Boot application deployed on a Kubernetes cluster. The 
 
 The code for this project is hosted on GitHub. You can find the repository at the following link:
 
-[Code Repository]: https://github.com/git-utsav/nagp-pub
+[Code Repository]:  [https://github.com/git-utsav/nagp-pub](https://github.com/git-utsav/nagp-pub)
 
 ## Docker Hub
 
@@ -21,7 +21,7 @@ The Docker images for this project are available on Docker Hub. You can pull the
 
 The Service API tier is accessible at the following URL. You can use this endpoint to view the records from the backend tier:
 
-[Service API URL]: http://34.93.10.112/nagp/all-user
+[Service API URL]: [Service API URL](http://34.93.10.112/nagp/all-user)
 
 ## Screen Recording
 
@@ -29,7 +29,7 @@ A screen recording demonstrating the deployment process, including:
 
 You can watch the video at the following link:
 
-[Screen Recording Video]: https://nagarro-my.sharepoint.com/:f:/p/utsavkumar_tripathi/EvaUI2M71OVLmGN0JcvpNWAB1PFFMJIleu4PhJaZEqgG6Q?e=RjmQ1E
+[Screen Recording Video]: [Screen Recording Video](https://nagarro-my.sharepoint.com/:f:/p/utsavkumar_tripathi/EvaUI2M71OVLmGN0JcvpNWAB1PFFMJIleu4PhJaZEqgG6Q?e=RjmQ1E)
 
 ## Kubernetes Services Description
 
