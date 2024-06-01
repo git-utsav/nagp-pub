@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nagp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nagp-app
+  template:
+    metadata:
+      labels:
+        app: nagp-app
+    spec:
+      containers:
+      - name: nagp-container
+        image: utsav194/nagp-docker:5
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POSTGRES_DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: POSTGRES_DB_URL
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: db-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: db-password
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "300m"
+          limits:
+            memory: "600Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nagp-service
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 34.93.10.112
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: nagp-app
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nagp-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nagp-deployment
+  minReplicas: 3
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 30
